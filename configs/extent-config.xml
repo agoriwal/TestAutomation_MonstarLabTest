@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extentreports>
     <configuration>
-        <theme>standard</theme>
+        <!-- standard, dark -->
+        <theme>dark</theme>
+        <!-- document encoding -->
         <encoding>UTF-8</encoding>
-        <protocol>https</protocol>
-        <!-- title of the report -->
-        <documentTitle>BDD Cucumber Framework</documentTitle>
-        <!-- report name - displayedat top -->
-        <reportName>BDD Cucumber Report</reportName>
-        <!-- global date format override --> <!-- defaults to yyyy-MM-dd -->
-        <dateFormat>yyyy-MM-dd</dateFormat>
-        <!-- global time format override --> <!--defaults to HH:mm:ss -->
-        <timeFormat>HH:mm:ss</timeFormat>
-        <!--custom javascript -->
-        <script>
+        <!-- protocol for script and stylesheets -->
+        <protocol>http</protocol>
+        <!-- title of the document -->
+        <documentTitle>Extent</documentTitle>
+        <!-- report name - displayed at top-nav -->
+        <reportName>Monstarlab Test Report</reportName>
+        <!-- location of charts in the test view -->
+        <testViewChartLocation>bottom</testViewChartLocation>
+        <scripts>
             <![CDATA[
-            $(document).ready(function(){
-
-            });
+                $(document).ready(function() {
+                });
             ]]>
-        </script>
-        <!-- custom style -->
-        <style>
+        </scripts>
+        <!-- custom styles -->
+        <styles>
             <![CDATA[
-
             ]]>
-        </style>
+        </styles>
     </configuration>
 </extentreports>

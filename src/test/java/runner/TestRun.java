@@ -17,12 +17,11 @@ import utils.ConfigFileReader;
                 , tags = "@test123"
                 , monochrome = true
                 , plugin = {"pretty","json:target/cucumber-json/cucumber.json","html:target/cucumber-json/cucumber.html"}
-//                , plugin = {"pretty","html:target/cucumber-json/cucumber.html"}
-//                , plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
+//                , plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 )
 public class TestRun {
 
-    //to implement extent report
+// Below code is for implemention of Sparkextent report which is still under development
 //    @BeforeClass
 //    public static void initExtentReport() {
 //

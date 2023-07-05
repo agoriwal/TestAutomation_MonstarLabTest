@@ -21,7 +21,6 @@ public class HomePageStepdefs {
 
     @And("^User has navigated to \"([^\"]*)\"$")
     public void userHasNavigatedTo(String arg0) throws Throwable {
-            Thread.sleep(5000);
             homePageObject.navigateToCarousel(arg0);
         }
 
