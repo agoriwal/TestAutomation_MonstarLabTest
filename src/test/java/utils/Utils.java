@@ -1,8 +1,5 @@
 package utils;
-import base.DriverHandler;
-import com.google.common.base.Function;
-import interfaces.iConfigReader;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
@@ -10,12 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.*;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
-
-import static java.time.Duration.ofSeconds;
 
 public class Utils {
     WebDriver driver;
@@ -124,34 +118,34 @@ public class Utils {
         }
     }
 
-    public void waitForTheElement(By by, String sCarouselname) {
-        try {
-            FluentWait wait = new FluentWait(driver);
-            wait.withTimeout(configFileReader.getFluentWaitTimeOut(), TimeUnit.SECONDS);
-            wait.pollingEvery(configFileReader.getFluentWaitPollingTime(), TimeUnit.SECONDS);
-            wait.ignoring(NoSuchElementException.class);
-            wait.ignoring(ElementNotVisibleException.class);
-            wait.ignoring(StaleElementReferenceException.class);
-            wait.until(new Function<WebDriver, WebElement>()
-//            WebElement elementTo = (WebElement) wait.until(new Function<WebDriver, WebElement>()
-            {
-                public WebElement apply(WebDriver driver)
-                {
-                    WebElement ele = driver.findElement(by);
-                    String value = ele.getText().trim();
-                    if(value.equalsIgnoreCase(sCarouselname))
-                    {
-                        return ele;
-                    }
-                    else{
-                        scrollToElement(ele);
-                        return null;
-                    }
-                }
-            });
+    public void waitTillWebPageLoad(){
+        try{
+            ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
         }
         catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void waitForTheElement(By by, String sCarouselname) {
+        WebElement elm = driver.findElement(by);
+        try {
+            if (elm.isDisplayed()) {
+                System.out.println("Element is displayed");
+            } else {
+                scrollToElement(elm);
+                FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver);
+                wait.withTimeout(configFileReader.getFluentWaitTimeOut(), TimeUnit.SECONDS);
+                wait.pollingEvery(configFileReader.getFluentWaitPollingTime(), TimeUnit.SECONDS);
+                wait.ignoring(NoSuchElementException.class);
+                wait.ignoring(ElementNotVisibleException.class);
+                wait.ignoring(StaleElementReferenceException.class);
+                wait.until(ExpectedConditions.presenceOfElementLocated(by));
+                }
+            }
+            catch(Exception e)
+            {
                 e.printStackTrace();
             }
-    }
+        }
 }

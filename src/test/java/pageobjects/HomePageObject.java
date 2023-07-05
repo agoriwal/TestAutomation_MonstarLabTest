@@ -40,8 +40,9 @@ public class HomePageObject{
     public void navigateToCarousel(String sCarouselname) throws InterruptedException {
         WebElement elm = driver.findElement(By.xpath("//h2[contains(text(),'"+sCarouselname+"')]"));
         Thread.sleep(1000);
-        utils.scrollToElement(elm);
+        utils.waitTillWebPageLoad();
         utils.waitForTheElement(By.xpath("//h2[contains(text(),'"+sCarouselname+"')]"),sCarouselname);
+        utils.scrollToElement(elm);
     }
 
     public void verifyElementsNameOfCarousel(String arg0, int arg1){
