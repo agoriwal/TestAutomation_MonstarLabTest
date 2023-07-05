@@ -3,6 +3,7 @@ package utils;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -120,7 +121,7 @@ public class Utils {
 
     public void waitTillWebPageLoad(){
         try{
-            ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            new WebDriverWait(this.driver,configFileReader.getFluentWaitTimeOut()).until((ExpectedCondition<Boolean>) driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("Complete"));
         }
         catch(Exception e){
             e.printStackTrace();
